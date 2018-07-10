@@ -16,14 +16,15 @@
 
 use std::path::PathBuf;
 
-#[cfg(target_os = "windows")]                                mod win;
-#[cfg(target_os = "macos")]                                  mod mac;
-#[cfg(not(any(target_os = "windows", target_os = "macos")))] mod lin;
-#[cfg(unix)]                                                 mod unix;
+#[cfg(target_os = "windows")]                                                   mod win;
+#[cfg(target_os = "macos")]                                                     mod mac;
+#[cfg(target_os = "linux")]                                                     mod lin;
+#[cfg(not(target_os = "windows", target_os = "macos", target_os = "linux")]     mod unix;
 
-#[cfg(target_os = "windows")]                                use win as sys;
-#[cfg(target_os = "macos")]                                  use mac as sys;
-#[cfg(not(any(target_os = "windows", target_os = "macos")))] use lin as sys;
+#[cfg(target_os = "windows")]                                                   use win as sys;
+#[cfg(target_os = "macos")]                                                     use mac as sys;
+#[cfg(target_os = "linux")]                                                     use lin as sys;
+#[cfg(not(target_os = "windows", target_os = "macos", target_os = "linux")]     use unix as sys;
 
 /// Returns the path to the user's home directory.
 ///
