@@ -14,13 +14,13 @@
 
 #![deny(missing_docs)]
 
-// Assumption all platforms have `std` (this is not necceisarly true)
-use ::std::path::PathBuf;
+// Assumption all platforms have `std` (this is not this is not necessarily true)
+// TODO: check if for `iOS`, `emscripten` and similar
+use std::path::PathBuf;
 
 #[cfg(windows)] mod windows;
 #[cfg(target_os = "macos")] mod macos;
 #[cfg(target_os = "linux")] mod linux;
-#[cfg(unix)] mod unix;
 #[cfg(all(not(target_os = "windows"), not(target_os = "macos"), not(target_os = "linux")))] mod unsupported;
 
 #[cfg(windows)] use windows as sys;
