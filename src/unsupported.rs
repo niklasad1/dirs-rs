@@ -24,7 +24,7 @@ fn is_absolute_path(_path: OsString) -> Option<PathBuf> {
     None
 }
 
-fn run_xdg_user_dir_command(arg: &str) -> Option<PathBuf> {
+fn run_xdg_user_dir_command(_arg: &str) -> Option<PathBuf> {
     None
 }
 

@@ -13,6 +13,7 @@
 //!
 
 #![deny(missing_docs)]
+#![cfg_attr(feature = "cargo-clippy", deny(clippy))]
 
 // Assumption all platforms have `std` (this is not this is not necessarily true)
 // TODO: check if for `iOS`, `emscripten` and similar
