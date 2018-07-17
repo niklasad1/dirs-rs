@@ -1,5 +1,3 @@
-#![cfg(unix)]
-
 use std::env;
 use std::path::PathBuf;
 use std::mem;
@@ -46,4 +44,3 @@ pub fn home_dir() -> Option<PathBuf> {
         }
     }
 }
-

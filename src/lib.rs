@@ -14,16 +14,19 @@
 
 #![deny(missing_docs)]
 
-use std::path::PathBuf;
+// Assumption all platforms have `std` (this is not necceisarly true)
+use ::std::path::PathBuf;
 
-#[cfg(target_os = "windows")]                                mod win;
-#[cfg(target_os = "macos")]                                  mod mac;
-#[cfg(target_os = "linux")]                                  mod lin;
-#[cfg(unix)]                                                 mod unix;
+#[cfg(windows)] mod windows;
+#[cfg(target_os = "macos")] mod macos;
+#[cfg(target_os = "linux")] mod linux;
+#[cfg(unix)] mod unix;
+#[cfg(all(not(target_os = "windows"), not(target_os = "macos"), not(target_os = "linux")))] mod unsupported;
 
-#[cfg(target_os = "windows")]                                use win as sys;
-#[cfg(target_os = "macos")]                                  use mac as sys;
-#[cfg(target_os = "linux")]                                  use lin as sys;
+#[cfg(windows)] use windows as sys;
+#[cfg(target_os = "macos")] use macos as sys;
+#[cfg(target_os = "linux")] use linux as sys;
+#[cfg(all(not(target_os = "windows"), not(target_os = "macos"), not(target_os = "linux")))] use unsupported as sys;
 
 /// Returns the path to the user's home directory.
 ///
@@ -238,7 +241,6 @@ pub fn template_dir() -> Option<PathBuf> {
 pub fn video_dir() -> Option<PathBuf> {
     sys::video_dir()
 }
-
 
 #[cfg(test)]
 mod tests {
