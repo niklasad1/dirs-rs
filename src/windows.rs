@@ -1,7 +1,4 @@
-#![cfg(target_os = "windows")]
-
-use std;
-use std::path::PathBuf;
+use ::std::path::PathBuf;
 
 extern crate winapi;
 use self::winapi::shared::winerror;
